@@ -36,6 +36,12 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: buildLightDesign(),
       appBar: AppBar(
         toolbarHeight: 80,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add).iconColor(kBlackColor).iconSize(30),
+            onPressed: () => null,
+          ),
+        ],
         leading: Container(
           margin: const EdgeInsets.only(left: 10),
           decoration: BoxDecoration(
@@ -51,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
         foregroundColor: kBlackColor,
         backgroundColor: kWhiteColor,
         centerTitle: true,
-        title: Text(tripSheetsAppBarTitle).textColor(kBlackColor),
+        title: Text(tripSheetsAppBarTitle).fontSize(25).textColor(kBlackColor),
       ),
       backgroundColor: kWhiteColor,
       body: Center(
