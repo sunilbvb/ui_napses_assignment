@@ -29,6 +29,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
+  String _dropDownValue = 'All';
+  List<String> _dropDownValues = ['All']; // Option 2
+  // String _selectedLocation; // Option 2
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +63,77 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(tripSheetsAppBarTitle).fontSize(25).textColor(kBlackColor),
       ),
       backgroundColor: kWhiteColor,
-      body: Center(
-        child: Text(''),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            height: 90,
+            width: 150,
+            decoration: BoxDecoration(
+              color: kLightGrey,
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Delivery Date'),
+                Text(
+                  '27/05/2021',
+                ).fontSize(20).fontWeight(FontWeight.bold),
+              ],
+            ),
+          ),
+          Container(
+            height: 90,
+            width: 150,
+            decoration: BoxDecoration(
+              color: kLightGrey,
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            child:
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Text('Tripsheet Status'),
+/*                Text('All')
+                    .fontSize(20)
+                    .fontWeight(FontWeight.bold)
+                    .alignment(AlignmentDirectional.centerStart)
+                    .padding(left: 25),*/
+                Container(
+                  width: 100,
+                  padding: EdgeInsets.only(bottom: 10,),
+                  child: DropdownButton(
+                    isExpanded: true,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: kBlackColor,
+                    ),
+                    iconEnabledColor: Colors.redAccent,
+                    underline: SizedBox(),
+                    icon: Icon(Icons.arrow_drop_down),
+                    value: _dropDownValue ?? Text('All'),
+                    onChanged: (newValue) {
+                      setState(
+                        () {
+                          _dropDownValue = newValue;
+                        },
+                      );
+                    },
+                    items: _dropDownValues.map(
+                      (value) {
+                        return DropdownMenuItem(
+                          child: Text(value),
+                          value: value,
+                        );
+                      },
+                    ).toList(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
