@@ -12,7 +12,8 @@ const Color kLightOrangeColor = Color(0xfffff7f0);
 const Color kNavBarSelectedColor = Color(0xff040307);
 const Color kNavBarStrokeColor = Color(0x30040307);
 const Color kNavBarUnSelectedColor = Color(0xffacacac);
-
+const Color kOrangeColor = Colors.orangeAccent;
+const Color kGreenColor = Colors.green;
 const List<String> bottomNavBarText = [
   'Home',
   'Orders',
