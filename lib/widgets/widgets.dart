@@ -1,7 +1,9 @@
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_napses_assignment/constants/globals.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:ui_napses_assignment/models/tasks_model.dart';
+import 'package:ui_napses_assignment/view/custom_nav_bar_fields_model.dart';
 import '../constants/globals.dart';
 
 Widget customListTile(Task task) {
@@ -46,38 +48,14 @@ Widget customListTile(Task task) {
   ).paddingDirectional(vertical: 15);
 }
 
-List requiredListTilesFields = [
-  Task('Karolibaugh 1', 'ORDERS: 20 . AGENT: Self', '27', 'MAY', null, null),
-  Task(
-    'Tarasali 1',
-    'ORDERS: 20 . AGENT: DINESH KUMAR',
-    '27',
-    'MAY',
-    Icons.access_time_sharp,
-    kRedAccentColor,
-  ),
-  Task(
-    'Akota 1',
-    'ORDERS: 20 . AGENT: DINESH KUMAR',
-    '27',
-    'MAY',
-    Icons.access_time_sharp,
-    kRedAccentColor,
-  ),
-  Task(
-    'Karolibaugh 2',
-    'ORDERS: 20 . AGENT: DINESH KUMAR',
-    '27',
-    'MAY',
-    Icons.check_circle_outline,
-    kOrangeColor,
-  ),
-  Task(
-    'Karolibaugh 3',
-    'ORDERS: 20 . AGENT: DINESH KUMAR',
-    '27',
-    'MAY',
-    Icons.check_circle_outline,
-    kGreenColor,
-  ),
-];
+CustomNavigationBarItem customNavBar(
+    CustomNavBarFields customNavBar, int index, int currentIndex) {
+  return CustomNavigationBarItem(
+    icon: Icon(customNavBar.icon),
+    title: Text(customNavBar.text)
+        .textColor(
+            currentIndex == index ? kDarkBlueColor : kNavBarUnSelectedColor)
+        .fontSize(12)
+        .paddingDirectional(vertical: 10),
+  );
+}

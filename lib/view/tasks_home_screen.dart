@@ -1,6 +1,7 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
+import 'package:ui_napses_assignment/constants/constants.dart';
 import 'package:ui_napses_assignment/widgets/widgets.dart';
 import '../constants/globals.dart';
 
@@ -18,7 +19,7 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: buildLightDesign(),
+      bottomNavigationBar: lightDesignBottomNavigationBar,
       appBar: AppBar(
         toolbarHeight: 80,
         actions: [
@@ -72,7 +73,7 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
                           Text(
                             '27/05/2021',
                           )
-                              .fontSize(20)
+                              .fontSize(18)
                               .fontWeight(FontWeight.bold)
                               .padding(left: 25),
                         ],
@@ -195,71 +196,30 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
     );
   }
 
-  Widget buildLightDesign() {
-    return Container(
-      height: 100,
-      child: CustomNavigationBar(
-        iconSize: 30.0,
-        selectedColor: kDarkBlueColor,
-        strokeColor: kNavBarStrokeColor,
-        unSelectedColor: kNavBarUnSelectedColor,
-        backgroundColor: kWhiteColor,
-        items: [
-          CustomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            title: Text(bottomNavBarText[0])
-                .textColor(_currentIndex == 0
-                    ? kDarkBlueColor
-                    : kNavBarUnSelectedColor)
-                .fontSize(12)
-                .paddingDirectional(vertical: 10),
+  Widget get lightDesignBottomNavigationBar => Container(
+        height: 100,
+        child: CustomNavigationBar(
+          iconSize: 30.0,
+          selectedColor: kDarkBlueColor,
+          strokeColor: kNavBarStrokeColor,
+          unSelectedColor: kNavBarUnSelectedColor,
+          backgroundColor: kWhiteColor,
+          items: List.generate(
+            5,
+            (index) => customNavBar(
+              customNavBarFields[index],
+              index,
+              _currentIndex,
+            ),
           ),
-          CustomNavigationBarItem(
-            icon: Icon(Icons.note_outlined),
-            title: Text(bottomNavBarText[1])
-                .textColor(_currentIndex == 1
-                    ? kDarkBlueColor
-                    : kNavBarUnSelectedColor)
-                .fontSize(12)
-                .paddingDirectional(vertical: 10),
-          ),
-          CustomNavigationBarItem(
-            icon: Icon(Icons.check_box_outlined),
-            title: Text(bottomNavBarText[2])
-                .textColor(_currentIndex == 2
-                    ? kDarkBlueColor
-                    : kNavBarUnSelectedColor)
-                .fontSize(12)
-                .paddingDirectional(vertical: 10),
-          ),
-          CustomNavigationBarItem(
-            icon: Icon(Icons.account_balance_wallet_outlined),
-            title: Text(bottomNavBarText[3])
-                .textColor(_currentIndex == 3
-                    ? kDarkBlueColor
-                    : kNavBarUnSelectedColor)
-                .fontSize(12)
-                .paddingDirectional(vertical: 10),
-          ),
-          CustomNavigationBarItem(
-            icon: Icon(Icons.people_outline),
-            title: Text(bottomNavBarText[4])
-                .textColor(_currentIndex == 4
-                    ? kDarkBlueColor
-                    : kNavBarUnSelectedColor)
-                .fontSize(12)
-                .paddingDirectional(vertical: 10),
-          ),
-        ],
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(
-            () {
-              _currentIndex = index;
-            },
-          );
-        },
-      ),
-    );
-  }
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(
+              () {
+                _currentIndex = index;
+              },
+            );
+          },
+        ),
+      );
 }
