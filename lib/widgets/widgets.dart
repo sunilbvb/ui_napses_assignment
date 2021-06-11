@@ -59,3 +59,22 @@ CustomNavigationBarItem customNavBar(
         .paddingDirectional(vertical: 10),
   );
 }
+
+List<Widget> appBarActions = [
+  IconButton(
+    icon: Icon(Icons.add).iconColor(kBlackColor).iconSize(30),
+    onPressed: () => null,
+  ),
+];
+
+Widget get appBarLeadingWidget => Container(
+  margin: const EdgeInsets.only(left: 10),
+  decoration: BoxDecoration(
+    shape: BoxShape.circle,
+    border: Border.all(color: kGreyColor, width: 1),
+  ),
+  child: IconButton(
+    icon: Icon(Icons.menu).iconColor(kBlackColor),
+    onPressed: () => null,
+  ),
+);

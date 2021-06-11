@@ -22,23 +22,8 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
       bottomNavigationBar: lightDesignBottomNavigationBar,
       appBar: AppBar(
         toolbarHeight: 80,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add).iconColor(kBlackColor).iconSize(30),
-            onPressed: () => null,
-          ),
-        ],
-        leading: Container(
-          margin: const EdgeInsets.only(left: 10),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: kGreyColor, width: 1),
-          ),
-          child: IconButton(
-            icon: Icon(Icons.menu).iconColor(kBlackColor),
-            onPressed: () => null,
-          ),
-        ),
+        actions: appBarActions,
+        leading: appBarLeadingWidget,
         elevation: 0,
         foregroundColor: kBlackColor,
         backgroundColor: kWhiteColor,
@@ -115,13 +100,13 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
                               value: _dropDownValue ?? Text('All'),
                               onChanged: (newValue) {
                                 setState(
-                                  () {
+                                      () {
                                     _dropDownValue = newValue;
                                   },
                                 );
                               },
                               items: _dropDownValues.map(
-                                (value) {
+                                    (value) {
                                   return DropdownMenuItem(
                                     child: Text(value),
                                     value: value,
@@ -135,9 +120,6 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
                     ),
                   ),
                 ],
-              ),
-              SizedBox(
-                height: 20,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -163,13 +145,13 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
                       value: _dropDownValue2,
                       onChanged: (newValue) {
                         setState(
-                          () {
+                              () {
                             _dropDownValue2 = newValue;
                           },
                         );
                       },
                       items: _dropDownValues.map(
-                        (value) {
+                            (value) {
                           return DropdownMenuItem(
                             child: Text(value),
                             value: value,
@@ -179,14 +161,11 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
                     ).padding(horizontal: 12),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
+              ).paddingDirectional(vertical: 20),
               Column(
                 children: List.generate(
                   5,
-                  (index) => customListTile(requiredListTilesFields[index]),
+                      (index) => customListTile(requiredListTilesFields[index]),
                 ),
               ),
             ],
@@ -196,7 +175,8 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
     );
   }
 
-  Widget get lightDesignBottomNavigationBar => Container(
+  Widget get lightDesignBottomNavigationBar =>
+      Container(
         height: 100,
         child: CustomNavigationBar(
           iconSize: 30.0,
@@ -206,16 +186,17 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
           backgroundColor: kWhiteColor,
           items: List.generate(
             5,
-            (index) => customNavBar(
-              customNavBarFields[index],
-              index,
-              _currentIndex,
-            ),
+                (index) =>
+                customNavBar(
+                  customNavBarFields[index],
+                  index,
+                  _currentIndex,
+                ),
           ),
           currentIndex: _currentIndex,
           onTap: (index) {
             setState(
-              () {
+                  () {
                 _currentIndex = index;
               },
             );
