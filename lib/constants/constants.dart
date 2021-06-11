@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ui_napses_assignment/models/custom_nav_bar_fields_model.dart';
 import 'package:ui_napses_assignment/models/tasks_model.dart';
-import 'package:ui_napses_assignment/view/custom_nav_bar_fields_model.dart';
 
 import 'globals.dart';
 

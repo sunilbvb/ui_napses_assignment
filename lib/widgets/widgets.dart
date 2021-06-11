@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:ui_napses_assignment/constants/globals.dart';
 import 'package:styled_widget/styled_widget.dart';
+import 'package:ui_napses_assignment/models/custom_nav_bar_fields_model.dart';
 import 'package:ui_napses_assignment/models/tasks_model.dart';
-import 'package:ui_napses_assignment/view/custom_nav_bar_fields_model.dart';
 import '../constants/globals.dart';
 
 Widget customListTile(Task task) {
