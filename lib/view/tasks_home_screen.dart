@@ -4,6 +4,8 @@ import 'package:styled_widget/styled_widget.dart';
 import 'package:ui_napses_assignment/constants/constants.dart';
 import 'package:ui_napses_assignment/widgets/widgets.dart';
 import '../constants/globals.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+import 'package:intl/intl.dart';
 
 class TasksHomeScreen extends StatefulWidget {
   @override
@@ -13,8 +15,9 @@ class TasksHomeScreen extends StatefulWidget {
 class _TasksHomeScreenState extends State<TasksHomeScreen> {
   int _currentIndex = 0;
   String _dropDownValue = 'All';
-  List<String> _dropDownValues = ['All', 'All Agents']; // Option 2
+  List<String> _dropDownValues = ['All', 'All Agents'];
   String _dropDownValue2 = 'All Agents';
+  String _selectedDate = 'Select date';
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +57,15 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Delivery Date').padding(left: 25),
-                          Text(
-                            '27/05/2021',
-                          )
-                              .fontSize(18)
-                              .fontWeight(FontWeight.bold)
-                              .padding(left: 25),
+                          Text('Delivery Date').padding(left: 25, vertical: 5),
+                          InkWell(
+                            child: Text(_selectedDate)
+                                .fontSize(16)
+                                .fontWeight(FontWeight.bold),
+                            onTap: () {
+                              openDatePicker();
+                            },
+                          ).padding(left: 25, vertical: 7),
                         ],
                       ),
                     ),
@@ -100,13 +105,13 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
                               value: _dropDownValue ?? Text('All'),
                               onChanged: (newValue) {
                                 setState(
-                                      () {
+                                  () {
                                     _dropDownValue = newValue;
                                   },
                                 );
                               },
                               items: _dropDownValues.map(
-                                    (value) {
+                                (value) {
                                   return DropdownMenuItem(
                                     child: Text(value),
                                     value: value,
@@ -145,13 +150,13 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
                       value: _dropDownValue2,
                       onChanged: (newValue) {
                         setState(
-                              () {
+                          () {
                             _dropDownValue2 = newValue;
                           },
                         );
                       },
                       items: _dropDownValues.map(
-                            (value) {
+                        (value) {
                           return DropdownMenuItem(
                             child: Text(value),
                             value: value,
@@ -165,7 +170,7 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
               Column(
                 children: List.generate(
                   5,
-                      (index) => customListTile(requiredListTilesFields[index]),
+                  (index) => customListTile(requiredListTilesFields[index]),
                 ),
               ),
             ],
@@ -175,8 +180,28 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
     );
   }
 
-  Widget get lightDesignBottomNavigationBar =>
-      Container(
+  void openDatePicker() async {
+    DateTime newDateTime = await showRoundedDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2030),
+      height: 290,
+      textPositiveButton: 'OKAY',
+      theme: datePickerThemeData,
+      background: kIndigoColor,
+      styleDatePicker: styleDatePickerMethod,
+    );
+    if (newDateTime != null)
+      setState(
+        () {
+          final DateFormat formatter = DateFormat('yyyy/MM/d');
+          _selectedDate = formatter.format(newDateTime);
+        },
+      );
+  }
+
+  Widget get lightDesignBottomNavigationBar => Container(
         height: 100,
         child: CustomNavigationBar(
           iconSize: 30.0,
@@ -186,17 +211,16 @@ class _TasksHomeScreenState extends State<TasksHomeScreen> {
           backgroundColor: kWhiteColor,
           items: List.generate(
             5,
-                (index) =>
-                customNavBar(
-                  customNavBarFields[index],
-                  index,
-                  _currentIndex,
-                ),
+            (index) => customNavBar(
+              customNavBarFields[index],
+              index,
+              _currentIndex,
+            ),
           ),
           currentIndex: _currentIndex,
           onTap: (index) {
             setState(
-                  () {
+              () {
                 _currentIndex = index;
               },
             );

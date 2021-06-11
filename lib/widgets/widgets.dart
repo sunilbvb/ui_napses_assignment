@@ -1,5 +1,6 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:ui_napses_assignment/constants/globals.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:ui_napses_assignment/models/tasks_model.dart';
@@ -18,7 +19,6 @@ Widget customListTile(Task task) {
         margin: const EdgeInsets.only(left: 10),
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
-          border: Border.all(color: kGreyColor),
         ),
         child: Container(
           color: kWhiteColor,
@@ -26,8 +26,8 @@ Widget customListTile(Task task) {
             TextSpan(
               children: [
                 TextSpan(
-                  text: task.defaultDate,
-                ).fontWeight(FontWeight.bold).fontSize(12),
+                  text: '${task.defaultDate}',
+                ).fontWeight(FontWeight.bold).fontSize(14),
                 TextSpan(text: '\n${task.defaultMonth}').fontSize(10),
               ],
             ),
@@ -68,13 +68,55 @@ List<Widget> appBarActions = [
 ];
 
 Widget get appBarLeadingWidget => Container(
-  margin: const EdgeInsets.only(left: 10),
-  decoration: BoxDecoration(
-    shape: BoxShape.circle,
-    border: Border.all(color: kGreyColor, width: 1),
-  ),
-  child: IconButton(
-    icon: Icon(Icons.menu).iconColor(kBlackColor),
-    onPressed: () => null,
-  ),
-);
+      margin: const EdgeInsets.only(left: 10),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(color: kGreyColor, width: 1),
+      ),
+      child: IconButton(
+        icon: Icon(Icons.menu).iconColor(kBlackColor),
+        onPressed: () => null,
+      ),
+    );
+
+ThemeData get datePickerThemeData => ThemeData(
+      primaryColor: kIndigoColor,
+      primaryColorDark: kIndigoColor,
+      bottomAppBarColor: kIndigoColor,
+      bottomSheetTheme: BottomSheetThemeData(backgroundColor: kDarkBlueColor),
+    );
+
+MaterialRoundedDatePickerStyle get styleDatePickerMethod =>
+    MaterialRoundedDatePickerStyle(
+      textStyleDayButton: TextStyle(fontSize: 0, color: Colors.white),
+      textStyleYearButton: TextStyle(
+        fontSize: 0,
+        color: Colors.white,
+      ),
+      textStyleDayHeader: TextStyle(
+        fontSize: 14,
+        color: kBlackColor,
+      ),
+      textStyleButtonNegative: TextStyle(
+          fontSize: 0, color: Colors.white, fontWeight: FontWeight.bold),
+      textStyleCurrentDayOnCalendar:
+          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      textStyleMonthYearHeader: TextStyle(
+          fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
+      paddingDatePicker: EdgeInsets.only(top: 12),
+      paddingActionBar: EdgeInsets.only(right: 95, top: 0),
+      colorArrowNext: kDarkBlueColor,
+      colorArrowPrevious: kDarkBlueColor,
+      textStyleButtonPositive: TextStyle(
+        fontSize: 20,
+        color: kWhiteColor,
+        fontWeight: FontWeight.bold,
+      ),
+      decorationDateSelected:
+          BoxDecoration(color: kIndigoColor, shape: BoxShape.circle),
+      paddingDateYearHeader: EdgeInsets.all(0),
+      paddingMonthHeader: EdgeInsets.all(0),
+      backgroundActionBar: kIndigoColor,
+      backgroundHeader: Color(0xff5165f8),
+      sizeArrow: 20,
+    );

@@ -4,6 +4,7 @@ const tripSheetsAppBarTitle = 'Tripsheets';
 const Color kDarkBlueColor = Color(0xff0000FF);
 const Color kLightGrey = Color(0xffF0F0F0);
 const Color kBlueColor = Colors.blue;
+const Color kIndigoColor = Color(0xff5165f8);
 const Color kBlackColor = Colors.black;
 const Color kWhiteColor = Colors.white;
 const Color kGreyColor = Colors.grey;
